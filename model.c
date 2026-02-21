@@ -20,10 +20,9 @@ int main(int AC, char *ARG[]){
     int U_X2 = atoi(ARG[1]); int I_Y2 = atoi(ARG[2]);
     for(int index = 0 ; index < 6 ; index++){
         options[index]=distance(data[index][0],data[index][1],U_X2,I_Y2);
-        printf("Manhattan Distance of:\n%i\t%i\nfrom: %i,%i\tis: %f\n",U_X2,I_Y2,data[index][0],data[index][1],options[index]);
     }
     qsort(options, 5, sizeof(double), compare);
     for(int index = 0 ; index < K + 1 ; index++){
-        printf("the closest %dth distance is %.2f\n",index,options[index]);
+        printf("the closest %dth distance is %.2f\n",index+1,options[index]);
     }
 }
