@@ -6,20 +6,7 @@ int data[][3] = {{7,1,1},{24,0,0},{11,1,0},{17,0,1},{22,1,0},{15,1,1},{8,0,0},{1
 
 int type1c,type0c; double options[95][2];
 
-double distance(int X1, int Y1, int X2, int Y2){
-    int result;
-    __asm__ volatile (
-        "subl %2, %0\n\t"
-        "imull %0, %0\n\t"
-        "subl %3, %1\n\t"
-        "imull %1, %1\n\t"
-        "addl %1, %0"
-        : "=&r" (result), "+r" (Y1)
-        : "r" (X2), "r" (Y2), "0" (X1)
-        : "cc"
-    );
-    return result;
-}
+double distance(int X1, int Y1, int X2, int Y2){ return sqrt(pow((X1-X2),2)+pow((Y1-Y2),2));}
 int compare(const void *a, const void *b) { double diff = ((double*)a)[0] - ((double*)b)[0]; return (diff > 0) - (diff < 0); }
 
 int main(int AC, char *ARG[]){
@@ -31,6 +18,7 @@ int main(int AC, char *ARG[]){
     qsort(options, 95, sizeof(options[0]), compare);
     int K = 3;
     for(int index = 0 ; index < K ; index++){
+        printf("the closest %dth distance is %.2f of category %.1f\n",index+1,options[index][0],options[index][1]);
         if ( options[index][1] == 0 ){ type0c++; } 
         else { type1c++;}
     }
