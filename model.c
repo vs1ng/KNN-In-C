@@ -11,8 +11,8 @@ int data[][3] = {
            {22,1,0}
 };
 
+int type1c,type0c;
 double options[5][2];
-int K = 3;
 
 double distance(int X1, int Y1, int X2, int Y2){
     return sqrt(pow((X1-X2),2)+pow((Y1-Y2),2));
@@ -30,7 +30,20 @@ int main(int AC, char *ARG[]){
         options[index][1]=data[index][2];
     }
     qsort(options, 5, sizeof(options[0]), compare);
+    int K = 3;
     for(int index = 0 ; index < K ; index++){
         printf("the closest %dth distance is %.2f of category %.1f\n",index+1,options[index][0],options[index][1]);
+        if ( options[index][1] == 0 ){
+            type0c++;
+        } else {
+            type1c++;
+        }
+    }
+    if (type1c > type0c){
+        putchar('1');
+    } else if ( type0c > type1c ) {
+        putchar('0');
+    } else if ( type0c == type1c ) {
+        puts("what");
     }
 }
